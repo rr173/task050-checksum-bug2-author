@@ -130,7 +130,7 @@ func (s *server) putBlob(w http.ResponseWriter, r *http.Request) {
 
 func (s *server) listBlobs(w http.ResponseWriter, r *http.Request) {
 	blobs := s.store.List()
-	var out []blobMeta
+	out := make([]blobMeta, 0, len(blobs))
 	for _, b := range blobs {
 		content, err := s.store.Get(b.Name)
 		if err != nil {
